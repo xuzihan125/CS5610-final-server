@@ -40,10 +40,20 @@ function UserRoutes(app) {
     const updateUser = async (req, res) => {
         const id = req.params.id;
         const newUser = req.body;
-        // if (!newUser.password || !newUser.email || !newUser.username) {
-        //     res.status(400).json({ message: "Username, password and email are required" });
-        //     return;
-        // }
+        const duplicateUserByUsername = await dao.findUserByUsername(newUser.username);
+        if (duplicateUserByUsername && duplicateUserByUsername._id != id) {
+            res.status(400).json({ message: "Username already exists" });
+            return;
+        }
+        const duplicateUserByEmail = await dao.findUserByEmail(newUser.email);
+        if (duplicateUserByEmail && duplicateUserByEmail._id != id) {
+            res.status(400).json({ message: "Email already exists" });
+            return;
+        }
+        if (!newUser.username || !newUser.password || !newUser.email) {
+            res.status(400).json({ message: "Username, password and email are required" });
+            return;
+        }
         const status = await dao.updateUser(id, newUser);
         const currentUser = await dao.findUserById(id);
         req.session["currentUser"] = currentUser;
