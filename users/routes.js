@@ -32,7 +32,7 @@ function UserRoutes(app) {
     }
 
     const createUser = async (req, res) => {
-        const { username, password, firstName, lastName, email, birthday, isVegeterian, isVegan, isLactoseIntolerant, isGlutenIntolerant, role } = req.body;
+        const { username, password, firstName, lastName, email, birthday, isVegeterian, isVegan, isLactoseIntolerant, isGlutenIntolerant, role } = req.params;
         const user = await dao.createUser({ username, password, firstName, lastName, email, birthday, isVegeterian, isVegan, isLactoseIntolerant, isGlutenIntolerant, role });
         res.json(user);
     }
@@ -48,7 +48,7 @@ function UserRoutes(app) {
 
     const updateFirstName = async (req, res) => {
         const id = req.params.id;
-        const newFirstName = req.params.firstName;
+        const newFirstName = req.params.newFirstName;
         const status = await dao.updateUser(id, { firstName: newFirstName });
         res.json(status);
     }
@@ -67,7 +67,7 @@ function UserRoutes(app) {
             req.session["currentUser"] = currentUser;
             res.json(user);
         } else {
-            res.sesndStatus(403);
+            res.sendStatus(403);
         }
     }
 
@@ -81,6 +81,8 @@ function UserRoutes(app) {
         res.json(currentUser);
     }
 
+
+
     app.post("/users/signout", signout);
     app.post("/users/signin", signin);
     app.post("/users/account", account);
@@ -91,7 +93,7 @@ function UserRoutes(app) {
     app.get("/users/credentials/:username/:password", findUserByCredentials)
     app.get("/users/role/:role", findUsersByRole)
     app.get("/users/:username/:password/:firstName/:lastName/:email/:birthday/:isVegeterian/:isVegan/:isLactoseIntolerant/:isGlutenIntolerant/:role", createUser)
-    app.get("/users/updateFirstName/:id/:firstName", updateFirstName)
+    app.get("/users/updateFirstName/:id/:newFirstName", updateFirstName)
     app.delete("/users/:id", deleteUser)
     app.put("/users/:id", updateUser)
 }
