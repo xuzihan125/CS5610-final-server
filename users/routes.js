@@ -40,6 +40,10 @@ function UserRoutes(app) {
     const updateUser = async (req, res) => {
         const id = req.params.id;
         const newUser = req.body;
+        // if (!newUser.password || !newUser.email || !newUser.username) {
+        //     res.status(400).json({ message: "Username, password and email are required" });
+        //     return;
+        // }
         const status = await dao.updateUser(id, newUser);
         const currentUser = await dao.findUserById(id);
         req.session["currentUser"] = currentUser;
@@ -81,16 +85,48 @@ function UserRoutes(app) {
         res.json(currentUser);
     }
 
+    const signup = async (req, res) => {
+        const { username, password, firstName, lastName, email, birthday, isVegeterian, isVegan, isLactoseIntolerant, isGlutenIntolerant, role } = req.body;
+        if (!username || !password || !email) {
+            res.status(400).json({ message: "Username, password and email are required" });
+            return;
+        }
+        const existingUserByUsername = await dao.findUserByUsername(username);
+        if (existingUserByUsername) {
+            res.status(400).json({ message: "Username already exists" });
+            return;
+        }
+        const existingUserByEmail = await dao.findUserByEmail(email);
+        if (existingUserByEmail) {
+            res.status(400).json({ message: "Email already exists" });
+            return;
+        }
+        const user = await dao.createUser({ username, password, firstName, lastName, email, birthday, isVegeterian, isVegan, isLactoseIntolerant, isGlutenIntolerant, role });
+        if (user) {
+            const currentUser = user;
+            req.session["currentUser"] = currentUser;
+            res.json(user);
+        } else {
+            res.sendStatus(403);
+        }
+    }
 
+    const findUserByEmail = async (req, res) => {
+        const email = req.params.email;
+        const user = await dao.findUserByEmail(email);
+        res.json(user);
+    }
 
     app.post("/users/signout", signout);
     app.post("/users/signin", signin);
     app.post("/users/account", account);
+    app.post("/users/signup", signup);
 
     app.get("/users", findAllUsers)
     app.get("/users/:id", findUserById)
     app.get("/users/username/:username", findUserByUsername)
     app.get("/users/credentials/:username/:password", findUserByCredentials)
+    app.get("/users/email/:email", findUserByEmail)
     app.get("/users/role/:role", findUsersByRole)
     app.get("/users/:username/:password/:firstName/:lastName/:email/:birthday/:isVegeterian/:isVegan/:isLactoseIntolerant/:isGlutenIntolerant/:role", createUser)
     app.get("/users/updateFirstName/:id/:newFirstName", updateFirstName)

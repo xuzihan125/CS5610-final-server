@@ -16,6 +16,10 @@ export const findUserByCredentials = (username, password) => {
     return User.findOne({ username: username, password: password })
 }
 
+export const findUserByEmail = (email) => {
+    return User.findOne({ email: email })
+}
+
 export const findUsersByRole = (role) => {
     return User.find({ role: role })
 }

@@ -12,8 +12,8 @@ const userSchema = new mongoose.Schema({
     isGlutenIntolerant: { type: Boolean, default: false },
     role: {
         type: String,
-        enum: ['ADMIN', 'PREMIUM_USER', 'REGULAR_USER'],
-        default: 'REGULAR_USER'
+        enum: ['ADMIN', 'PREMIUM_USER', 'USER'],
+        default: 'USER'
     },
     createdOn: { type: Date, default: Date.now },
 }, { collection: 'users' });
