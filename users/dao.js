@@ -16,6 +16,10 @@ export const findUserByCredentials = (username, password) => {
     return User.findOne({ username: username, password: password })
 }
 
+export const findUsersBySearchTerm = (searchTerm) => {
+    return User.find({ username: { $regex: searchTerm, $options: 'i' } })
+}
+
 export const findUserByEmail = (email) => {
     return User.findOne({ email: email })
 }

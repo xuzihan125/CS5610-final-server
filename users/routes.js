@@ -127,6 +127,12 @@ function UserRoutes(app) {
         res.json(user);
     }
 
+    const findUsersBySearchTerm = async (req, res) => {
+        const searchTerm = req.params.searchTerm;
+        const users = await dao.findUsersBySearchTerm(searchTerm);
+        res.json(users);
+    }
+
     app.post("/users/signout", signout);
     app.post("/users/signin", signin);
     app.post("/users/account", account);
@@ -135,6 +141,7 @@ function UserRoutes(app) {
     app.get("/users", findAllUsers)
     app.get("/users/:id", findUserById)
     app.get("/users/username/:username", findUserByUsername)
+    app.get("/users/search/:searchTerm", findUsersBySearchTerm);
     app.get("/users/credentials/:username/:password", findUserByCredentials)
     app.get("/users/email/:email", findUserByEmail)
     app.get("/users/role/:role", findUsersByRole)
