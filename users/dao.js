@@ -1,34 +1,34 @@
 import User from './model.js';
 
 export const findAllUsers = () => {
-    User.find()
+    return User.find()
 };
 
 export const findUserById = (id) => {
-    User.findById(id)
+    return User.findById(id)
 }
 
 export const findUserByUsername = (username) => {
-    User.findOne({ username: username })
+    return User.findOne({ username: username })
 }
 
 export const findUserByCredentials = (username, password) => {
-    User.findOne({ username: username, password: password })
+    return User.findOne({ username: username, password: password })
 }
 
 export const findUsersByRole = (role) => {
-    User.find({ role: role })
+    return User.find({ role: role })
 }
 
 export const createUser = (user) => {
-    User.create(user)
+    return User.create(user)
 }
 
 export const updateUser = (id, user) => {
-    User.updateOne({ _id: id }, { $set: user })
+    return User.updateOne({ _id: id }, { $set: user })
 }
 
 export const deleteUser = (id) => {
-    User.deleteOne({ _id: id })
+    return User.deleteOne({ _id: id })
 }
 
