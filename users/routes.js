@@ -32,7 +32,21 @@ function UserRoutes(app) {
     }
 
     const createUser = async (req, res) => {
-        const { username, password, firstName, lastName, email, birthday, isVegeterian, isVegan, isLactoseIntolerant, isGlutenIntolerant, role } = req.params;
+        const { username, password, firstName, lastName, email, birthday, isVegeterian, isVegan, isLactoseIntolerant, isGlutenIntolerant, role } = req.body;
+        if (!username || !password || !email) {
+            res.status(400).json({ message: "Username, password and email are required" });
+            return;
+        }
+        const existingUserByUsername = await dao.findUserByUsername(username);
+        if (existingUserByUsername) {
+            res.status(400).json({ message: "Username already exists" });
+            return;
+        }
+        const existingUserByEmail = await dao.findUserByEmail(email);
+        if (existingUserByEmail) {
+            res.status(400).json({ message: "Email already exists" });
+            return;
+        }
         const user = await dao.createUser({ username, password, firstName, lastName, email, birthday, isVegeterian, isVegan, isLactoseIntolerant, isGlutenIntolerant, role });
         res.json(user);
     }
@@ -137,6 +151,7 @@ function UserRoutes(app) {
     app.post("/users/signin", signin);
     app.post("/users/account", account);
     app.post("/users/signup", signup);
+    app.post("/users/create", createUser);
 
     app.get("/users", findAllUsers)
     app.get("/users/:id", findUserById)
@@ -145,7 +160,6 @@ function UserRoutes(app) {
     app.get("/users/credentials/:username/:password", findUserByCredentials)
     app.get("/users/email/:email", findUserByEmail)
     app.get("/users/role/:role", findUsersByRole)
-    app.get("/users/:username/:password/:firstName/:lastName/:email/:birthday/:isVegeterian/:isVegan/:isLactoseIntolerant/:isGlutenIntolerant/:role", createUser)
     app.get("/users/updateFirstName/:id/:newFirstName", updateFirstName)
     app.delete("/users/:id", deleteUser)
     app.put("/users/:id", updateUser)
