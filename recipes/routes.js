@@ -18,9 +18,9 @@ function RecipeRoutes(app) {
         res.json(recipe);
     }
 
-    const findRecipeBySearchTerm = async (req, res) => {
+    const findRecipesBySearchTerm = async (req, res) => {
         const searchTerm = req.params.searchTerm;
-        const recipes = await dao.findRecipeBySearchTerm(searchTerm);
+        const recipes = await dao.findRecipesBySearchTerm(searchTerm);
         res.json(recipes);
     }
 
@@ -28,11 +28,6 @@ function RecipeRoutes(app) {
         const { title, spoonacularId, image, author, cuisine, ingredients, nutrients, instructions, isVegetarian, isGlutenFree, isDairyFree } = req.body;
         if (!title || !ingredients || !instructions) {
             res.status(400).json({ message: "Title, ingredients, and instructions are required" });
-            return;
-        }
-        const existingRecipeByName = await dao.findRecipeByTitle(title);
-        if (existingRecipeByName) {
-            res.status(400).json({ message: "Recipe with the same title already exists" });
             return;
         }
         const recipe = await dao.createRecipe({ title, spoonacularId, image, author, cuisine, ingredients, nutrients, instructions, isVegetarian, isGlutenFree, isDairyFree });
@@ -77,7 +72,7 @@ function RecipeRoutes(app) {
     app.put('/recipes/:id', updateRecipe);
     app.delete('/recipes/:id', deleteRecipe);
     app.get('/recipes/title/:title', findRecipeByTitle);
-    app.get('/recipes/search/:searchTerm', findRecipeBySearchTerm);
+    app.get('/recipes/search/:searchTerm', findRecipesBySearchTerm);
     app.get('/recipes/:id', findRecipeById);
     app.get('/recipes', findAllRecipes);
     app.get('/recipes/author/:authorId', findAllRecipesByAuthorId);

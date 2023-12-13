@@ -23,7 +23,7 @@ export const findRecipeByTitle = (recipeName) => {
     return Recipe.find({ title: recipeName }).populate('author').populate("ingredients.ingredient").populate('nutrients.nutrient');
 }
 
-export const findRecipeBySearchTerm = (searchTerm) => {
+export const findRecipesBySearchTerm = (searchTerm) => {
     return Recipe.find({ title: { $regex: searchTerm, $options: 'i' } }).populate('author').populate("ingredients.ingredient").populate('nutrients.nutrient');
 }
 
