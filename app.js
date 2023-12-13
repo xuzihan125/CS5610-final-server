@@ -10,6 +10,7 @@ import IngredientRoutes from './ingredients/routes.js';
 import RecipesUseIngredientsRoutes from './recipes_use_ingredients/routes.js';
 import RecipesHaveNutrientsRoutes from './recipes_have_nutrients/routes.js';
 import LikesRoutes from './likes/routes.js';
+import NutrientRoutes from './nutrients/routes.js';
 
 mongoose.disconnect();
 mongoose.connect("mongodb://127.0.0.1:27017/recipe");
@@ -30,6 +31,7 @@ RecipeRoutes(app);
 UserRoutes(app);
 FollowsRoutes(app);
 IngredientRoutes(app);
+NutrientRoutes(app);
 RecipesUseIngredientsRoutes(app);
 RecipesHaveNutrientsRoutes(app);
 LikesRoutes(app);

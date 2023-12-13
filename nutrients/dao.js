@@ -9,7 +9,7 @@ export const findNutrientById = (id) => {
 }
 
 export const findNutrientByName = (name) => {
-    return Nutrient.find({ name: name })
+    return Nutrient.findOne({ name: name })
 }
 
 export const findNutrientsBySearchTerm = (searchTerm) => {

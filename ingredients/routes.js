@@ -32,12 +32,11 @@ function IngredientRoutes(app) {
             return;
         }
         const existingIngredientByName = await dao.findIngredientByName(name);
-        if (existingIngredientByName) {
-            res.status(400).json({ message: "Ingredient already exists" });
-            return;
+        if (!existingIngredientByName) {
+            const ingredient = await dao.createIngredient({ name: name });
+            res.json(ingredient);
         }
-        const ingredient = await dao.createIngredient({ name });
-        res.json(ingredient);
+
     }
 
     const updateIngredient = async (req, res) => {

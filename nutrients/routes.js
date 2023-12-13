@@ -32,12 +32,10 @@ function NutrientRoutes(app) {
             return;
         }
         const existingNutrientByName = await dao.findNutrientByName(name);
-        if (existingNutrientByName) {
-            res.status(400).json({ message: "Nutrient already exists" });
-            return;
+        if (!existingNutrientByName) {
+            const nutrient = await dao.createNutrient({ name: name });
+            res.json(nutrient);
         }
-        const nutrient = await dao.createNutrient({ name });
-        res.json(nutrient);
     }
 
     const updateNutrient = async (req, res) => {

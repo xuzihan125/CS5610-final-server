@@ -9,7 +9,7 @@ export const findIngredientById = (id) => {
 }
 
 export const findIngredientByName = (name) => {
-    return Ingredient.find({ name: name })
+    return Ingredient.findOne({ name: name })
 }
 
 export const findIngredientsBySearchTerm = (searchTerm) => {
