@@ -25,7 +25,7 @@ function RecipeRoutes(app) {
     }
 
     const createRecipe = async (req, res) => {
-        const { title, spoonacularId, image, author, cuisine, ingredients, nutrients, instructions, isVegetarian, isVegan, isGlutenFree, isDairyFree } = req.body;
+        const { title, spoonacularId, image, author, cuisine, ingredients, nutrients, instructions, isVegetarian, isGlutenFree, isDairyFree } = req.body;
         if (!title || !ingredients || !instructions) {
             res.status(400).json({ message: "Title, ingredients, and instructions are required" });
             return;
@@ -35,7 +35,7 @@ function RecipeRoutes(app) {
             res.status(400).json({ message: "Recipe with the same title already exists" });
             return;
         }
-        const recipe = await dao.createRecipe({ title, spoonacularId, image, author, cuisine, ingredients, nutrients, instructions, isVegetarian, isVegan, isGlutenFree, isDairyFree });
+        const recipe = await dao.createRecipe({ title, spoonacularId, image, author, cuisine, ingredients, nutrients, instructions, isVegetarian, isGlutenFree, isDairyFree });
         res.json(recipe);
     }
 

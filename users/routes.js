@@ -32,7 +32,7 @@ function UserRoutes(app) {
     }
 
     const createUser = async (req, res) => {
-        const { username, password, firstName, lastName, email, birthday, isVegeterian, isVegan, isLactoseIntolerant, isGlutenIntolerant, role } = req.body;
+        const { username, password, firstName, lastName, email, birthday, isVegeterian, isGlutenIntolerant, role } = req.body;
         if (!username || !password || !email) {
             res.status(400).json({ message: "Username, password and email are required" });
             return;
@@ -47,7 +47,7 @@ function UserRoutes(app) {
             res.status(400).json({ message: "Email already exists" });
             return;
         }
-        const user = await dao.createUser({ username, password, firstName, lastName, email, birthday, isVegeterian, isVegan, isLactoseIntolerant, isGlutenIntolerant, role });
+        const user = await dao.createUser({ username, password, firstName, lastName, email, birthday, isVegeterian, isGlutenIntolerant, role });
         res.json(user);
     }
 
@@ -110,7 +110,7 @@ function UserRoutes(app) {
     }
 
     const signup = async (req, res) => {
-        const { username, password, firstName, lastName, email, birthday, isVegeterian, isVegan, isLactoseIntolerant, isGlutenIntolerant, role } = req.body;
+        const { username, password, firstName, lastName, email, birthday, isVegeterian, isGlutenIntolerant, role } = req.body;
         if (!username || !password || !email) {
             res.status(400).json({ message: "Username, password and email are required" });
             return;
@@ -125,7 +125,7 @@ function UserRoutes(app) {
             res.status(400).json({ message: "Email already exists" });
             return;
         }
-        const user = await dao.createUser({ username, password, firstName, lastName, email, birthday, isVegeterian, isVegan, isLactoseIntolerant, isGlutenIntolerant, role });
+        const user = await dao.createUser({ username, password, firstName, lastName, email, birthday, isVegeterian, isGlutenIntolerant, role });
         if (user) {
             const currentUser = user;
             req.session["currentUser"] = currentUser;
