@@ -28,8 +28,8 @@ function LikesRoutes(app) {
         res.json(recipes);
     }
 
-    app.post("/users/:user/likes/:recipe", userLikesRecipe);
-    app.delete("/users/:user/likes/:recipe", userUnlikesRecipe);
+    app.post("/recipes/:recipe/likes", userLikesRecipe);
+    app.delete("/recipes/:recipe/likes", userUnlikesRecipe);
     app.get("/recipes/:recipe/likes", findUsersLikingRecipe);
     app.get("/users/:user/likes", findRecipesLikedByUser);
 }

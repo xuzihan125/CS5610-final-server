@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const recipeUsesIngredientsSchema = new mongoose.Schema({
+const recipesUseIngredientsSchema = new mongoose.Schema({
     recipe: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'recipes'
@@ -10,6 +10,6 @@ const recipeUsesIngredientsSchema = new mongoose.Schema({
         ref: 'ingredients'
     },
 
-}, { collection: 'recipe_uses_ingredients' });
+}, { collection: 'recipes_use_ingredients' });
 
-export default recipeUsesIngredientsSchema;
+export default recipesUseIngredientsSchema;

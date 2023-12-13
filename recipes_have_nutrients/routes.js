@@ -1,6 +1,6 @@
 import * as dao from "./dao.js";
 
-function RecipeHasNutrientsRoutes(app) {
+function RecipesHaveNutrientsRoutes(app) {
 
     const recipesHasNutrient = async (req, res) => {
         const recipe = req.params.recipe;
@@ -35,4 +35,4 @@ function RecipeHasNutrientsRoutes(app) {
 
 }
 
-export default RecipeHasNutrientsRoutes;
+export default RecipesHaveNutrientsRoutes;

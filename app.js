@@ -7,8 +7,8 @@ import RecipeRoutes from './recipes/routes.js';
 import UserRoutes from './users/routes.js';
 import FollowsRoutes from './follows/routes.js';
 import IngredientRoutes from './ingredients/routes.js';
-import RecipeUsesIngredientsRoutes from './recipe_uses_ingredients/routes.js';
-import RecipeHasNutrientsRoutes from './recipe_has_nutrients/routes.js';
+import RecipesUseIngredientsRoutes from './recipes_use_ingredients/routes.js';
+import RecipesHaveNutrientsRoutes from './recipes_have_nutrients/routes.js';
 import LikesRoutes from './likes/routes.js';
 
 mongoose.disconnect();
@@ -30,8 +30,8 @@ RecipeRoutes(app);
 UserRoutes(app);
 FollowsRoutes(app);
 IngredientRoutes(app);
-RecipeUsesIngredientsRoutes(app);
-RecipeHasNutrientsRoutes(app);
+RecipesUseIngredientsRoutes(app);
+RecipesHaveNutrientsRoutes(app);
 LikesRoutes(app);
 
 app.listen(process.env.PORT || 4000);

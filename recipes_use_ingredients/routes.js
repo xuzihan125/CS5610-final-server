@@ -1,6 +1,6 @@
 import * as dao from "./dao.js";
 
-function RecipeUsesIngredientsRoutes(app) {
+function RecipesUseIngredientsRoutes(app) {
     const recipesUsesIngredient = async (req, res) => {
         const recipe = req.params.recipe;
         const ingredient = req.params.ingredient;
@@ -32,3 +32,5 @@ function RecipeUsesIngredientsRoutes(app) {
     app.get("/recipes/:recipe/ingredients", findIngredientsUsedByRecipe);
     app.get("/ingredients/:ingredient/recipes", findRecipesUsingIngredient);
 }
+
+export default RecipesUseIngredientsRoutes;
