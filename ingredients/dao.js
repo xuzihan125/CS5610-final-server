@@ -12,7 +12,7 @@ export const findIngredientByName = (name) => {
     return Ingredient.find({ name: name })
 }
 
-export const findIngredientBySearchTerm = (searchTerm) => {
+export const findIngredientsBySearchTerm = (searchTerm) => {
     return Ingredient.find({ name: { $regex: searchTerm, $options: 'i' } })
 }
 

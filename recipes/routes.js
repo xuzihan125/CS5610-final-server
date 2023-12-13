@@ -67,6 +67,12 @@ function RecipeRoutes(app) {
         res.json(recipes);
     }
 
+    const findRecipeBySpoonacularId = async (req, res) => {
+        const spoonacularId = req.params.spoonacularId;
+        const recipe = await dao.findRecipeBySpoonacularId(spoonacularId);
+        res.json(recipe);
+    }
+
     app.post('/recipes', createRecipe);
     app.put('/recipes/:id', updateRecipe);
     app.delete('/recipes/:id', deleteRecipe);
@@ -75,6 +81,7 @@ function RecipeRoutes(app) {
     app.get('/recipes/:id', findRecipeById);
     app.get('/recipes', findAllRecipes);
     app.get('/recipes/author/:authorId', findAllRecipesByAuthorId);
+    app.get('/recipes/spoonacular/:spoonacularId', findRecipeBySpoonacularId);
 }
 
 export default RecipeRoutes;

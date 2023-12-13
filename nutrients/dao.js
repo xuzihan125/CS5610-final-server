@@ -12,7 +12,7 @@ export const findNutrientByName = (name) => {
     return Nutrient.find({ name: name })
 }
 
-export const findNutrientBySearchTerm = (searchTerm) => {
+export const findNutrientsBySearchTerm = (searchTerm) => {
     return Nutrient.find({ name: { $regex: searchTerm, $options: 'i' } })
 }
 

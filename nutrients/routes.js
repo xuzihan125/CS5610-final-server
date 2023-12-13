@@ -19,9 +19,9 @@ function NutrientRoutes(app) {
         res.json(nutrient);
     }
 
-    const findNutrientBySearchTerm = async (req, res) => {
+    const findNutrientsBySearchTerm = async (req, res) => {
         const searchTerm = req.params.searchTerm;
-        const nutrients = await dao.findNutrientBySearchTerm(searchTerm);
+        const nutrients = await dao.findNutrientsBySearchTerm(searchTerm);
         res.json(nutrients);
     }
 
@@ -65,7 +65,7 @@ function NutrientRoutes(app) {
     app.get('/nutrients', findAllNutrients);
     app.get('/nutrients/:id', findNutrientById);
     app.get('/nutrients/name/:name', findNutrientByName);
-    app.get('/nutrients/search/:searchTerm', findNutrientBySearchTerm);
+    app.get('/nutrients/search/:searchTerm', findNutrientsBySearchTerm);
     app.post('/nutrients', createNutrient);
     app.put('/nutrients/:id', updateNutrient);
     app.delete('/nutrients/:id', deleteNutrient);

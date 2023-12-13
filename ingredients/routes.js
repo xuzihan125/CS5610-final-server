@@ -19,9 +19,9 @@ function IngredientRoutes(app) {
         res.json(ingredient);
     }
 
-    const findIngredientBySearchTerm = async (req, res) => {
+    const findIngredientsBySearchTerm = async (req, res) => {
         const searchTerm = req.params.searchTerm;
-        const ingredients = await dao.findIngredientBySearchTerm(searchTerm);
+        const ingredients = await dao.findIngredientsBySearchTerm(searchTerm);
         res.json(ingredients);
     }
 
@@ -65,7 +65,7 @@ function IngredientRoutes(app) {
     app.get('/ingredients', findAllIngredients);
     app.get('/ingredients/:id', findIngredientById);
     app.get('/ingredients/name/:name', findIngredientByName);
-    app.get('/ingredients/search/:searchTerm', findIngredientBySearchTerm);
+    app.get('/ingredients/search/:searchTerm', findIngredientsBySearchTerm);
     app.post('/ingredients', createIngredient);
     app.put('/ingredients/:id', updateIngredient);
     app.delete('/ingredients/:id', deleteIngredient);
