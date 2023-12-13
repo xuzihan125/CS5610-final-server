@@ -21,8 +21,7 @@ const recipeSchema = new mongoose.Schema({
                 required: true
             },
             unit: String
-        }],
-        required: true
+        }]
     },
     nutrients: {
         type: [{
@@ -46,7 +45,11 @@ const recipeSchema = new mongoose.Schema({
             }
         }],
         required: true
-    }
+    },
+    isVegetarian: {type: Boolean, default: false},
+    isVegan: {type: Boolean, default: false},
+    isGlutenFree: {type: Boolean, default: false},
+    isDairyFree: {type: Boolean, default: false},
 }, { collection: 'recipes' })
 
 export default recipeSchema;
