@@ -1,17 +1,17 @@
 import * as dao from "./dao.js";
 
 function RecipesUseIngredientsRoutes(app) {
-    const recipesUsesIngredient = async (req, res) => {
+    const recipeUsesIngredient = async (req, res) => {
         const recipe = req.params.recipe;
         const ingredient = req.params.ingredient;
-        const status = await dao.recipesUsesIngredient(recipe, ingredient);
+        const status = await dao.recipeUsesIngredient(recipe, ingredient);
         res.json(status);
     }
 
-    const recipesUnusesIngredient = async (req, res) => {
+    const recipeUnusesIngredient = async (req, res) => {
         const recipe = req.params.recipe;
         const ingredient = req.params.ingredient;
-        const status = await dao.recipesUnusesIngredient(recipe, ingredient);
+        const status = await dao.recipeUnusesIngredient(recipe, ingredient);
         res.json(status);
     }
 
@@ -27,8 +27,8 @@ function RecipesUseIngredientsRoutes(app) {
         res.json(ingredients);
     }
 
-    app.post("/recipes/:recipe/ingredients/:ingredient", recipesUsesIngredient);
-    app.delete("/recipes/:recipe/ingredients/:ingredient", recipesUnusesIngredient);
+    app.post("/recipes/:recipe/ingredients/:ingredient", recipeUsesIngredient);
+    app.delete("/recipes/:recipe/ingredients/:ingredient", recipeUnusesIngredient);
     app.get("/recipes/:recipe/ingredients", findIngredientsUsedByRecipe);
     app.get("/ingredients/:ingredient/recipes", findRecipesUsingIngredient);
 }

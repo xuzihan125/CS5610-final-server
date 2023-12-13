@@ -1,10 +1,10 @@
 import RecipesUseIngredients from './model.js';
 
-export const recipesUsesIngredient = (recipe, ingredient) => {
+export const recipeUsesIngredient = (recipe, ingredient) => {
     return RecipesUseIngredients.create({ recipe: recipe, ingredient: ingredient })
 }
 
-export const recipesUnusesIngredient = (recipe, ingredient) => {
+export const recipeUnusesIngredient = (recipe, ingredient) => {
     return RecipesUseIngredients.deleteOne({ recipe: recipe, ingredient: ingredient })
 }
 
