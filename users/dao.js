@@ -1,4 +1,7 @@
 import User from './model.js';
+import Like from '../likes/model.js';
+import Recipe from '../recipes/model.js';
+import Follows from '../follows/model.js';
 
 export const findAllUsers = () => {
     return User.find()
@@ -36,7 +39,10 @@ export const updateUser = (id, user) => {
     return User.updateOne({ _id: id }, { $set: user })
 }
 
-export const deleteUser = (id) => {
+export const deleteUser = async (id) => {
+    await Like.deleteMany({ user: id }).exec()
+    await Follows.deleteMany({ follower: id }).exec()
+    await Follows.deleteMany({ following: id }).exec()
     return User.deleteOne({ _id: id })
 }
 

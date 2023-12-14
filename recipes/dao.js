@@ -2,6 +2,9 @@ import Recipe from "./model.js";
 import Ingredient from "../ingredients/model.js";
 import User from "../users/model.js";
 import Nutrient from "../nutrients/model.js";
+import RecipesUseIngredients from "../recipes_use_ingredients/model.js";
+import RecipesHaveNutrients from "../recipes_have_nutrients/model.js";
+import Likes from "../likes/model.js";
 
 export const createRecipe = (recipe) => {
     return Recipe.create(recipe);
@@ -35,7 +38,10 @@ export const updateRecipe = (recipeId, recipe) => {
     return Recipe.updateOne({ _id: recipeId }, { $set: recipe });
 }
 
-export const deleteRecipe = (recipeId) => {
+export const deleteRecipe = async (recipeId) => {
+    await Likes.deleteMany({ recipe: recipeId }).exec()
+    await RecipesUseIngredients.deleteMany({ recipe: recipeId }).exec()
+    await RecipesHaveNutrients.deleteMany({ recipe: recipeId }).exec()
     return Recipe.deleteOne({ _id: recipeId });
 }
 
