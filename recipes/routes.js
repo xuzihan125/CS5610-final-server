@@ -26,8 +26,8 @@ function RecipeRoutes(app) {
 
     const createRecipe = async (req, res) => {
         const { title, spoonacularId, image, author, cuisine, ingredients, nutrients, instructions, isVegetarian, isGlutenFree, isDairyFree } = req.body;
-        if (!title || !ingredients || !instructions) {
-            res.status(400).json({ message: "Title, ingredients, and instructions are required" });
+        if (!title || !ingredients) {
+            res.status(400).json({ message: "Title, ingredients are required" });
             return;
         }
         const recipe = await dao.createRecipe({ title, spoonacularId, image, author, cuisine, ingredients, nutrients, instructions, isVegetarian, isGlutenFree, isDairyFree });

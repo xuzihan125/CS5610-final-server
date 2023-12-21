@@ -27,6 +27,7 @@ function NutrientRoutes(app) {
 
     const createNutrient = async (req, res) => {
         const { name } = req.body;
+        console.log(req.body);
         if (!name) {
             res.status(400).json({ message: "Name is required" });
             return;
