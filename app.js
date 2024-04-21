@@ -12,8 +12,8 @@ import RecipesHaveNutrientsRoutes from './recipes_have_nutrients/routes.js';
 import LikesRoutes from './likes/routes.js';
 import NutrientRoutes from './nutrients/routes.js';
 
-const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/recipe";
-const FRONT_END = process.env.FRONTEND_URL || "http://localhost:3000";
+const CONNECTION_STRING = "mongodb+srv://xuzihan125:xzh111xzh111@kanbas-1.nyescqa.mongodb.net/?retryWrites=true&w=majority&appName=kanbas-1"
+const FRONT_END = "https://fastidious-froyo-1a5e79.netlify.app";
 mongoose.connect(CONNECTION_STRING);
 const app = express()
 app.use(cors({
@@ -45,4 +45,4 @@ RecipesUseIngredientsRoutes(app);
 RecipesHaveNutrientsRoutes(app);
 LikesRoutes(app);
 
-app.listen(process.env.PORT || 4000);
+app.listen(4000);
