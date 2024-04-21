@@ -21,18 +21,28 @@ app.use(cors({
         origin: FRONT_END
 }));
 
+// const https = require('https');
+// const fs = require('fs');
 
-// mongoose.connect("mongodb://127.0.0.1:27017/recipe");
-// const app = express();
-// app.use(cors({
-//     credentials: true,
-//     origin: 'http://localhost:3000',
-// }));
+// 读取证书和私钥文件
+// const options = {
+//     key: fs.readFileSync('key.pem'),
+//     cert: fs.readFileSync('cert.pem'),
+//     passphrase: 'any string'
+// };
+
 const sessionOptions = {
     secret: "any string",
     resave: false,
     saveUninitialized: false,
 };
+if (process.env.NODE_ENV !== "development") {
+    sessionOptions.proxy = true;
+    sessionOptions.cookie = {
+        sameSite: "none",
+        secure: true,
+    };
+}
 app.use(session(sessionOptions));
 app.use(express.json());
 

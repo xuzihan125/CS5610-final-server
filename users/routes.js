@@ -152,7 +152,6 @@ function UserRoutes(app) {
     app.post("/users/account", account);
     app.post("/users/signup", signup);
     app.post("/users/create", createUser);
-
     app.get("/users", findAllUsers)
     app.get("/users/:id", findUserById)
     app.get("/users/username/:username", findUserByUsername)
