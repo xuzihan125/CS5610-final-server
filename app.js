@@ -12,13 +12,22 @@ import RecipesHaveNutrientsRoutes from './recipes_have_nutrients/routes.js';
 import LikesRoutes from './likes/routes.js';
 import NutrientRoutes from './nutrients/routes.js';
 
-mongoose.disconnect();
-mongoose.connect("mongodb://127.0.0.1:27017/recipe");
-const app = express();
+const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/recipe";
+const FRONT_END = process.env.FRONTEND_URL || "http://localhost:3000";
+mongoose.connect(CONNECTION_STRING);
+const app = express()
 app.use(cors({
-    credentials: true,
-    origin: 'http://localhost:3000',
+        credentials: true,
+        origin: FRONT_END
 }));
+
+
+// mongoose.connect("mongodb://127.0.0.1:27017/recipe");
+// const app = express();
+// app.use(cors({
+//     credentials: true,
+//     origin: 'http://localhost:3000',
+// }));
 const sessionOptions = {
     secret: "any string",
     resave: false,

@@ -17,6 +17,6 @@ const userSchema = new mongoose.Schema({
         default: 'USER'
     },
     createdOn: { type: Date, default: Date.now },
-}, { collection: 'users' });
+}, { collection: 'users_recipe' });
 
 export default userSchema;
